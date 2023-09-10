@@ -5,7 +5,7 @@ def validar_archivo_bmp(archivo):
     try:
         with open(archivo, 'rb') as file:
             Signaturecabecera = file.read(2)
-            return b'BM' == Signaturecabecera
+            return b'BM' == Signaturecabecera #comprobamos que los primeros dos bits sean 'BM'
     except IOError:
         return False
 
@@ -13,7 +13,7 @@ def mostrar_cabecera_bmp(archivo):
     with open(archivo, 'rb') as file:
         cabecera = file.read(14)
 
-        # Extraemos información de la cabecera
+        #Extraemos información de la cabecera
         Signature = cabecera[:2].decode('ascii')
         FileSize = int.from_bytes(cabecera[2:6], byteorder='little')
         DataOffset = int.from_bytes(cabecera[10:14], byteorder='little')

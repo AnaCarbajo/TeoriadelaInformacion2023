@@ -5,7 +5,7 @@ def validar_archivo_wav(archivo):
     try:
         with open(archivo, 'rb') as file:
             cabecera = file.read(12)
-            return b'RIFF' == cabecera[:4] and b'WAVE' == cabecera[8:12]
+            return b'RIFF' == cabecera[:4] and b'WAVE' == cabecera[8:12] #comprobamos que los primeros cuatro bits sean 'RIFF' Y los otros 4 bits 'WAV'
     except IOError:
         return False
 
@@ -13,7 +13,7 @@ def mostrar_cabecera_wav(archivo):
     with open(archivo, 'rb') as file:
         cabecera = file.read(44)
 
-        # Extraemos información de la cabecera
+        #Extraemos información de la cabecera
         ChunkID = cabecera[:4].decode('ascii')
         ChunkSize = int.from_bytes(cabecera[4:8], byteorder='little')
         Format = cabecera[8:12].decode('ascii')

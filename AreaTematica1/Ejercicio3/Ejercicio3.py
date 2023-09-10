@@ -9,14 +9,14 @@ def readfile(archivo):
             byte = file.read(1)
             if not byte:
                 break
-            byts.append(int.from_bytes(byte, byteorder='big'))
+            byts.append(int.from_bytes(byte, byteorder='big')) #convertimos cada byte en un numero entero y lo almacenamos en la lista
     return byts
 
 
 def calcular(byts):
     q = 256 #cantidad de simbolos ascii
     r = 2 #base de logaritmo
-    lenarchivo = len(byts)
+    longitud_archivo = len(byts)
 
 
     simbolos = []
@@ -25,20 +25,20 @@ def calcular(byts):
 
     probabilidades = []
     for ch in simbolos:
-        probabilidades.append(float(byts.count(ch)/lenarchivo))  #almacenamos las probabilidades de aparicion de cada simbolo en el archivo
+        probabilidades.append(float(byts.count(ch)/longitud_archivo))  #almacenamos las probabilidades de aparicion de cada simbolo en el archivo
     
-    Entropia = 0
+    entropia = 0
     for prob in probabilidades:
         if prob > 0:
-            Entropia += prob * math.log(1/prob,r)
-    print("Entropia: ", Entropia)
+            entropia += prob * math.log(1/prob,r)
+    print("Entropia: ", entropia)
 
-    EntropiaMaxima = math.log(float(q), r)
+    entropia_maxima = math.log(float(q), r)
 
-    Rendimiento = Entropia/EntropiaMaxima
+    rendimiento = entropia/entropia_maxima
 
-    Redundancia = (1 - Rendimiento)*100
-    print("Redundancia: ", Redundancia)
+    redundancia = (1 - rendimiento)*100
+    print("Redundancia: ", redundancia)
 
 if __name__ == '__main__':
     
